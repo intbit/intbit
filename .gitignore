@@ -1,0 +1,14 @@
+/.gradle
+build/
+
+# common file patterns
+*~
+._*
+.DS_Store
+tmp/
+
+# intellij
+*.iml
+*.ipr
+*.iws
+*.idea
