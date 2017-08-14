@@ -69,7 +69,7 @@ public class VariableByteEncoder
      *
      * @param unsigned a 64-bit unsigned integer to be encoded.
      * @param dst byte array to store the encoded bytes.
-     * @param offset of the byte array.
+     * @param dstOff offset of the byte array.
      * @return dstOff + number of written bytes.
      * @throws ArrayIndexOutOfBoundsException dst.length is less than dstOff + variableBytesOfUnsignedLong(unsigned).
      */
@@ -93,7 +93,7 @@ public class VariableByteEncoder
      *
      * @param unsigned a 32-bit unsigned integer to be encoded.
      * @param dst byte array to store the encoded bytes.
-     * @param offset of the byte array.
+     * @param dstOff offset of the byte array.
      * @return dstOff + number of written bytes.
      * @throws ArrayIndexOutOfBoundsException dst.length is less than dstOff + variableBytesOfUnsignedInt(unsigned).
      */
@@ -117,7 +117,7 @@ public class VariableByteEncoder
      *
      * @param signed a 64-bit signed integer to be encoded.
      * @param dst byte array to store the encoded bytes.
-     * @param offset of the byte array.
+     * @param dstOff offset of the byte array.
      * @return dstOff + number of written bytes.
      * @throws ArrayIndexOutOfBoundsException dst.length is less than dstOff + variableBytesOfZigZagLong(signed).
      */
@@ -134,7 +134,7 @@ public class VariableByteEncoder
      *
      * @param signed a 64-bit signed integer to be encoded.
      * @param dst byte array to store the encoded bytes.
-     * @param offset of the byte array.
+     * @param dstOff offset of the byte array.
      * @return dstOff + number of written bytes.
      * @throws ArrayIndexOutOfBoundsException dst.length is less than dstOff + variableBytesOfZigZagInt(signed).
      */

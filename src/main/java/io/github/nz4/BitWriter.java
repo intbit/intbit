@@ -1,5 +1,12 @@
 package io.github.nz4;
 
+/**
+ * BitWriter encodes sequence of bits to a byte array.
+ *
+ * BitWriter accumulates 8 bits in an internal buffer and flushes it to the
+ * destination byte array every 8 bits. You need to call {@link BitWriter#sync()}
+ * method to flush the final byte and synchronize the offset to 8-bit boundary.
+ */
 public class BitWriter
 {
     private int bitOffset;
@@ -7,18 +14,56 @@ public class BitWriter
     private final byte[] dst;
     private int dstOff;
 
+    /**
+     * Creates a new BitWriter.
+     *
+     * This is equivalent to <code>BitWriter(dst, 0)</code>.
+     *
+     * @param dst byte array to write bit sequence to.
+     * @exception NullPointerException If <code>dst</code> is <code>null</code>.
+     */
     public BitWriter(byte[] dst)
     {
         this(0, dst, 0);
     }
 
+    /**
+     * Creates a new BitWriter.
+     *
+     * The new BitWriter reads bit sequence from dst[dstOff].
+     *
+     * @param dst byte array to write bit sequence to.
+     * @param dstOff offset of the byte array.
+     * @exception NullPointerException If <code>dst</code> is <code>null</code>.
+     * @exception IndexOutOfBoundsException If <code>dstOff</code> is negative or greater than <code>dst.length</code>.
+     */
     public BitWriter(byte[] dst, int dstOff)
     {
         this(0, dst, dstOff);
     }
 
-    public BitWriter(int bitOffset, byte[] dst, int dstOff)
+    /**
+     * Creates a new BitWriter.
+     *
+     * The new BitWriter writes bit sequence to dst[dstOff] with first <code>bitOffset</code> bits skipped.
+     *
+     * @param dst byte array to write bit sequence to.
+     * @param dstOff offset of the byte array to read bit sequence from.
+     * @param bitOffset bit offset of dst[dstOff] to write bit sequence to.
+     * @exception IndexOutOfBoundsException If <code>dstOff</code> is negative or greater than <code>dst.length</code>.
+     * @exception IndexOutOfBoundsException if <code>bitOffset</code> is negative or greater than 8.
+     */
+    private BitWriter(int bitOffset, byte[] dst, int dstOff)
     {
+        if (dst == null) {
+            throw new NullPointerException();
+        }
+        if (dstOff < 0 || dstOff > dst.length) {
+            throw new IndexOutOfBoundsException();
+        }
+        if (bitOffset < 0 || bitOffset > 8) {
+            throw new IndexOutOfBoundsException();
+        }
         this.bitOffset = bitOffset;
         if (bitOffset > 0) {
             this.head = dst[dstOff] & ((1 << bitOffset) - 1);
@@ -42,6 +87,16 @@ public class BitWriter
     //    write(-1, count);
     //}
 
+    /**
+     * Writes bit sequence.
+     *
+     * This method can write at most 64 bits from a given long value to the byte array.
+     *
+     * @param bitPattern bit sequence in long.
+     * @param count number of bits to write from <code>bitPattern</code>.
+     * @exception IllegalArgumentException If count is negative or greater than 64.
+     * @exception IndexOutOfBoundsException If offset exceeds the capacity of byte array.
+     */
     public void writeLongLE(long bitPattern, int count)
     {
         if (count > 64 || count < 0) {
@@ -142,6 +197,11 @@ public class BitWriter
         }
     }
 
+    /**
+     * Flushes the final byte and synchronizes the offset to a 8-bit boundary.
+     *
+     * @exception IndexOutOfBoundsException If offset exceeds the capacity of byte array.
+     */
     public void sync()
     {
         if (bitOffset > 0) {
@@ -152,6 +212,11 @@ public class BitWriter
         }
     }
 
+    /**
+     * Gets current offset.
+     *
+     * @return offset of the byte array.
+     */
     public int getOffset()
     {
         return dstOff;
