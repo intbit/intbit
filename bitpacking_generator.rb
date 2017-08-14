@@ -115,10 +115,7 @@ def generate_packer_class(be, t)
     c.puts "{"
     c.indent do
       c.puts "switch (bits) {"
-      c.puts "case 0:"
-      c.puts "    // do nothing"
-      c.puts "    break;"
-      (1..MAX_BITS[t]).each do |bits|
+      (0..MAX_BITS[t]).each do |bits|
         c.puts "case #{bits}:"
         c.puts "    #{PACK_METHOD_NAME_PROC.call(be, t, bits)}(src, srcOff, dst, dstOff);"
         c.puts "    break;"
@@ -126,6 +123,14 @@ def generate_packer_class(be, t)
       c.puts "default:"
       c.puts "    throw new IllegalArgumentException(\"Bit width must be from 0 to #{MAX_BITS[t]} but got \" + bits);"
       c.puts "}"
+    end
+    c.puts "}"
+    c.puts
+
+    c.puts "public static void #{PACK_METHOD_NAME_PROC.call(be, t, 0)}(#{t}[] src, int srcOff, byte[] dst, int dstOff)"
+    c.puts "{"
+    c.indent do
+      c.puts "// do nothing"
     end
     c.puts "}"
     c.puts
@@ -174,6 +179,7 @@ def generate_unpacker_class(be, t)
   c = Writer.new
   c.puts "package #{PACKAGE_NAME};"
   c.puts
+  c.puts "import java.util.Arrays;"
   c.puts "import java.util.function.IntToLongFunction;"
   c.puts
   c.puts "final class #{class_name}"
@@ -188,10 +194,7 @@ def generate_unpacker_class(be, t)
       c.puts "{"
       c.indent do
         c.puts "switch (bits) {"
-        c.puts "case 0:"
-        c.puts "    // do nothing"
-        c.puts "    break;"
-        (1..MAX_BITS[t]).each do |bits|
+        (0..MAX_BITS[t]).each do |bits|
           c.puts "case #{bits}:"
           c.puts "    #{UNPACK_METHOD_NAME_PROC.call(be, t, bits)}(src, srcOff, dst, dstOff);"
           c.puts "    break;"
@@ -199,6 +202,14 @@ def generate_unpacker_class(be, t)
         c.puts "default:"
         c.puts "    throw new IllegalArgumentException(\"Bit width must be from 0 to #{MAX_BITS[t]} but got \" + bits);"
         c.puts "}"
+      end
+      c.puts "}"
+      c.puts
+
+      c.puts "public static void #{UNPACK_METHOD_NAME_PROC.call(be, t, 0)}(#{src_type} src, int srcOff, #{t}[] dst, int dstOff)"
+      c.puts "{"
+      c.indent do
+        c.puts "Arrays.fill(dst, dstOff, dstOff + 8, 0);"
       end
       c.puts "}"
       c.puts

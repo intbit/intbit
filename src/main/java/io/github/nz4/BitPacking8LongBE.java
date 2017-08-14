@@ -9,7 +9,7 @@ final class BitPacking8LongBE
     {
         switch (bits) {
         case 0:
-            // do nothing
+            bitPack8LongBE0(src, srcOff, dst, dstOff);
             break;
         case 1:
             bitPack8LongBE1(src, srcOff, dst, dstOff);
@@ -206,6 +206,11 @@ final class BitPacking8LongBE
         default:
             throw new IllegalArgumentException("Bit width must be from 0 to 64 but got " + bits);
         }
+    }
+
+    public static void bitPack8LongBE0(long[] src, int srcOff, byte[] dst, int dstOff)
+    {
+        // do nothing
     }
 
     public static void bitPack8LongBE1(long[] src, int srcOff, byte[] dst, int dstOff)

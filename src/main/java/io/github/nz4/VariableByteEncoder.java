@@ -15,6 +15,9 @@ public class VariableByteEncoder
      */
     public static int variableBytesOfUnsignedLong(long unsigned)
     {
+        if (unsigned == 0) {
+            return 1;
+        }
         int bits = 64 - Long.numberOfLeadingZeros(unsigned);
         return (bits + 6) / 7;
     }
@@ -29,6 +32,9 @@ public class VariableByteEncoder
      */
     public static int variableBytesOfUnsignedInt(int unsigned)
     {
+        if (unsigned == 0) {
+            return 1;
+        }
         int bits = 32 - Integer.numberOfLeadingZeros(unsigned);
         return (bits + 6) / 7;
     }
@@ -70,11 +76,11 @@ public class VariableByteEncoder
     public static int encodeUnsignedVariableLong(long unsigned, byte[] dst, int dstOff)
     {
         while ((unsigned & 0xffffffffffffff80L) != 0L) {
-            dst[dstOff] = (byte) ((unsigned & 0x7f) | 0x80);
-            unsigned >>>= 7;
+            dst[dstOff] = (byte) ((unsigned & 0x7fL) | 0x80L);
+            unsigned >>>= 7L;
             dstOff++;
         }
-        dst[dstOff] = (byte) (unsigned & 0x7f);
+        dst[dstOff] = (byte) (unsigned & 0x7fL);
         dstOff++;
         return dstOff;
     }
@@ -149,6 +155,11 @@ public class VariableByteEncoder
     public int getOffset()
     {
         return dstOff;
+    }
+
+    public void setOffset(int dstOff)
+    {
+        this.dstOff = dstOff;
     }
 
     public void writeUnsignedLong(long unsigned)

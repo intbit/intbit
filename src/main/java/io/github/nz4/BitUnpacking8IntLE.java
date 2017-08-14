@@ -1,5 +1,6 @@
 package io.github.nz4;
 
+import java.util.Arrays;
 import java.util.function.IntToLongFunction;
 
 final class BitUnpacking8IntLE
@@ -11,7 +12,7 @@ final class BitUnpacking8IntLE
     {
         switch (bits) {
         case 0:
-            // do nothing
+            bitUnpack8IntLE0(src, srcOff, dst, dstOff);
             break;
         case 1:
             bitUnpack8IntLE1(src, srcOff, dst, dstOff);
@@ -112,6 +113,11 @@ final class BitUnpacking8IntLE
         default:
             throw new IllegalArgumentException("Bit width must be from 0 to 32 but got " + bits);
         }
+    }
+
+    public static void bitUnpack8IntLE0(byte[] src, int srcOff, int[] dst, int dstOff)
+    {
+        Arrays.fill(dst, dstOff, dstOff + 8, 0);
     }
 
     public static void bitUnpack8IntLE1(byte[] src, int srcOff, int[] dst, int dstOff)
@@ -1206,7 +1212,7 @@ final class BitUnpacking8IntLE
     {
         switch (bits) {
         case 0:
-            // do nothing
+            bitUnpack8IntLE0(src, srcOff, dst, dstOff);
             break;
         case 1:
             bitUnpack8IntLE1(src, srcOff, dst, dstOff);
@@ -1307,6 +1313,11 @@ final class BitUnpacking8IntLE
         default:
             throw new IllegalArgumentException("Bit width must be from 0 to 32 but got " + bits);
         }
+    }
+
+    public static void bitUnpack8IntLE0(IntToLongFunction src, int srcOff, int[] dst, int dstOff)
+    {
+        Arrays.fill(dst, dstOff, dstOff + 8, 0);
     }
 
     public static void bitUnpack8IntLE1(IntToLongFunction src, int srcOff, int[] dst, int dstOff)

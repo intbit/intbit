@@ -9,7 +9,7 @@ final class BitPacking8IntLE
     {
         switch (bits) {
         case 0:
-            // do nothing
+            bitPack8IntLE0(src, srcOff, dst, dstOff);
             break;
         case 1:
             bitPack8IntLE1(src, srcOff, dst, dstOff);
@@ -110,6 +110,11 @@ final class BitPacking8IntLE
         default:
             throw new IllegalArgumentException("Bit width must be from 0 to 32 but got " + bits);
         }
+    }
+
+    public static void bitPack8IntLE0(int[] src, int srcOff, byte[] dst, int dstOff)
+    {
+        // do nothing
     }
 
     public static void bitPack8IntLE1(int[] src, int srcOff, byte[] dst, int dstOff)
