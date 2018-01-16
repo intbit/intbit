@@ -1,7 +1,7 @@
-package io.github.nz4;
+package io.github.intbit;
 
-import static io.github.nz4.ZigZagCodings.encodeZigZagInt;
-import static io.github.nz4.ZigZagCodings.encodeZigZagLong;
+import static io.github.intbit.ZigZagCodings.encodeZigZagInt;
+import static io.github.intbit.ZigZagCodings.encodeZigZagLong;
 
 public class VariableByteEncoder
 {

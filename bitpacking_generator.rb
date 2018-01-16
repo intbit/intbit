@@ -5,7 +5,7 @@ MAX_BITS = {long: 64, int: 32}
 LITERAL_SUFFIX = {long: "L", int: ""}
 BELE = {true => 'BE', false => 'LE'}
 
-PACKAGE_NAME = "io.github.nz4"
+PACKAGE_NAME = "io.github.intbit"
 OUTPUT_PATH = File.join(here, *"src/main/java".split("/"))
 PACK_CLASS_NAME_PROC = -> (be, t) { "BitPacking8#{t.capitalize}#{BELE[be]}" }
 UNPACK_CLASS_NAME_PROC = -> (be, t) { "BitUnpacking8#{t.capitalize}#{BELE[be]}" }

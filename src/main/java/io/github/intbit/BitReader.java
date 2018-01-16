@@ -1,4 +1,4 @@
-package io.github.nz4;
+package io.github.intbit;
 
 /**
  * BitReader decodes sequence of bits from a byte array.

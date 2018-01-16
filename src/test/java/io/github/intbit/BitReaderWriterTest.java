@@ -1,4 +1,4 @@
-package io.github.nz4;
+package io.github.intbit;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -1,10 +1,10 @@
-package io.github.nz4;
+package io.github.intbit;
 
 /**
  * ZigZagCodings implements encoder and decoder of ZigZag encoding.
  *
  * <pre>
- * import static io.github.nz4.ZigZagCodings.*;
+ * import static io.github.intbit.ZigZagCodings.*;
  *
  * long encoded = encodeZigZagLong(-32L);
  * encodeZigZagLong(encoded) == -32;

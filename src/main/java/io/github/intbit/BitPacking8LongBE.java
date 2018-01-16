@@ -1,4 +1,4 @@
-package io.github.nz4;
+package io.github.intbit;
 
 final class BitPacking8LongBE
 {

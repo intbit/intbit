@@ -1,13 +1,13 @@
-package io.github.nz4;
+package io.github.intbit;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 import org.junit.Test;
-import static io.github.nz4.VariableByteEncoder.variableBytesOfUnsignedInt;
-import static io.github.nz4.VariableByteEncoder.variableBytesOfUnsignedLong;
-import static io.github.nz4.VariableByteEncoder.variableBytesOfZigZagInt;
-import static io.github.nz4.VariableByteEncoder.variableBytesOfZigZagLong;
+import static io.github.intbit.VariableByteEncoder.variableBytesOfUnsignedInt;
+import static io.github.intbit.VariableByteEncoder.variableBytesOfUnsignedLong;
+import static io.github.intbit.VariableByteEncoder.variableBytesOfZigZagInt;
+import static io.github.intbit.VariableByteEncoder.variableBytesOfZigZagLong;
 import static org.hamcrest.Matchers.instanceOf;
 import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertThat;

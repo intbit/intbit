@@ -1,10 +1,10 @@
-package io.github.nz4;
+package io.github.intbit;
 
 import java.util.List;
 import java.util.stream.IntStream;
 import org.junit.Test;
-import static io.github.nz4.BitPacking.bitPack8IntLE;
-import static io.github.nz4.BitPacking.bitPack8LongLE;
+import static io.github.intbit.BitPacking.bitPack8IntLE;
+import static io.github.intbit.BitPacking.bitPack8LongLE;
 import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertThat;
 

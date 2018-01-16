@@ -1,4 +1,4 @@
-package io.github.nz4;
+package io.github.intbit;
 
 /**
  * BitWriter encodes sequence of bits to a byte array.
