@@ -1,14 +1,16 @@
-//plugins {
-//    id 'com.jfrog.bintray' version '1.7'
-//}
+plugins {
+    id 'com.jfrog.bintray' version '1.7.3'
+}
 
 apply plugin: 'idea'
 apply plugin: 'java'
 apply plugin: 'jacoco'
-//apply plugin: 'findbugs'
+apply plugin: 'findbugs'
 apply plugin: 'maven'
-//apply plugin: 'maven'
-//apply plugin: 'maven-publish'
+apply plugin: 'maven-publish'
+
+group = 'io.github.intbit'
+version = '0.1.0'
 
 task wrapper(type: Wrapper) {
     gradleVersion = '4.0.1'
@@ -58,18 +60,19 @@ jacocoTestReport {
 // "./gradlew check" runs jacocoTestReport
 check.dependsOn('jacocoTestReport')
 
-//findbugs {
-//    effort = 'max'
-//    reportLevel = 'high'
-//    ignoreFailures = false
-//}
-//
-//tasks.withType(FindBugs) {
-//    reports {
-//        xml.enabled = false
-//        html.enabled = true
-//    }
-//}
+findbugs {
+    toolVersion = '3.0.1'
+    effort = 'max'
+    reportLevel = 'high'
+    ignoreFailures = false
+}
+
+tasks.withType(FindBugs) {
+    reports {
+        xml.enabled = false
+        html.enabled = true
+    }
+}
 
 repositories {
     mavenCentral()
@@ -82,3 +85,46 @@ dependencies {
     testCompile 'pl.pragmatists:JUnitParams:1.0.5'
 }
 
+publishing {
+    publications {
+        mavenJava(MavenPublication) {
+            from components.java
+            artifact testsJar
+            artifact sourcesJar
+            artifact javadocJar
+        }
+    }
+}
+
+bintray {
+    user = System.getenv('BINTRAY_USER')
+    key = System.getenv('BINTRAY_KEY')
+
+    publications = ['mavenJava']
+
+    dryRun = false
+    publish = true
+
+    pkg {
+        userOrg = 'intbit'
+        repo = 'maven'
+        name = 'intbit'
+        licenses = ['Apache-2.0']
+        vcsUrl = 'https://github.com/intbit/intbit'
+        publicDownloadNumbers = true
+
+        version {
+            name = project.version
+            released = new Date().format("yyyy-MM-dd'T'HH:mm:ss.SSSZ")
+            vcsTag = "v${project.version}"
+        }
+    }
+}
+
+task release() {
+    dependsOn publish
+    dependsOn bintrayUpload
+    doLast {
+        println "Released ${project.version}."
+    }
+}
