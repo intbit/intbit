@@ -5,7 +5,7 @@ final class BitPacking8LongBE
     private BitPacking8LongBE()
     { }
 
-    public static void pack(long[] src, int srcOff, byte[] dst, int dstOff, int bits)
+    public static void pack(int bits, long[] src, int srcOff, byte[] dst, int dstOff)
     {
         switch (bits) {
         case 0:

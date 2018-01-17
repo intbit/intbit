@@ -111,7 +111,7 @@ def generate_packer_class(be, t)
     c.puts "private #{class_name}()"
     c.puts "{ }"
     c.puts
-    c.puts "public static void #{PACK_DISPATCH_METHOD_NAME_PROC.call(be, t)}(#{t}[] src, int srcOff, byte[] dst, int dstOff, int bits)"
+    c.puts "public static void #{PACK_DISPATCH_METHOD_NAME_PROC.call(be, t)}(int bits, #{t}[] src, int srcOff, byte[] dst, int dstOff)"
     c.puts "{"
     c.indent do
       c.puts "switch (bits) {"
@@ -180,7 +180,6 @@ def generate_unpacker_class(be, t)
   c.puts "package #{PACKAGE_NAME};"
   c.puts
   c.puts "import java.util.Arrays;"
-  c.puts "import java.util.function.IntToLongFunction;"
   c.puts
   c.puts "final class #{class_name}"
   c.puts "{"
@@ -189,8 +188,8 @@ def generate_unpacker_class(be, t)
     c.puts "{ }"
     c.puts
 
-    ["byte[]", "IntToLongFunction"].each do |src_type|
-      c.puts "public static void #{UNPACK_DISPATCH_METHOD_NAME_PROC.call(be, t)}(#{src_type} src, int srcOff, #{t}[] dst, int dstOff, int bits)"
+    ["byte[]"].each do |src_type|
+      c.puts "public static void #{UNPACK_DISPATCH_METHOD_NAME_PROC.call(be, t)}(int bits, #{src_type} src, int srcOff, #{t}[] dst, int dstOff)"
       c.puts "{"
       c.indent do
         c.puts "switch (bits) {"

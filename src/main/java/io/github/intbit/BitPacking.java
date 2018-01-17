@@ -1,102 +1,71 @@
 package io.github.intbit;
 
-import java.util.function.IntToLongFunction;
-
 public final class BitPacking
 {
+    private BitPacking()
+    { }
+
     public static void bitPack8IntLE(
+            int bits,
             int[] src, int srcOff,
-            byte[] dst, int dstOff,
-            int bits)
+            byte[] dst, int dstOff)
     {
-        BitPacking8IntLE.pack(src, srcOff, dst, dstOff, bits);
+        BitPacking8IntLE.pack(bits, src, srcOff, dst, dstOff);
     }
 
     public static void bitUnpack8IntLE(
+            int bits,
             byte[] src, int srcOff,
-            int[] dst, int dstOff,
-            int bits)
+            int[] dst, int dstOff)
     {
-        BitUnpacking8IntLE.unpack(src, srcOff, dst, dstOff, bits);
-    }
-
-    public static void bitUnpack8IntLE(
-            IntToLongFunction src, int srcOff,
-            int[] dst, int dstOff,
-            int bits)
-    {
-        BitUnpacking8IntLE.unpack(src, srcOff, dst, dstOff, bits);
+        BitUnpacking8IntLE.unpack(bits, src, srcOff, dst, dstOff);
     }
 
     public static void bitPack8LongLE(
+            int bits,
             long[] src, int srcOff,
-            byte[] dst, int dstOff,
-            int bits)
+            byte[] dst, int dstOff)
     {
-        BitPacking8LongLE.pack(src, srcOff, dst, dstOff, bits);
+        BitPacking8LongLE.pack(bits, src, srcOff, dst, dstOff);
     }
 
     public static void bitUnpack8LongLE(
+            int bits,
             byte[] src, int srcOff,
-            long[] dst, int dstOff,
-            int bits)
+            long[] dst, int dstOff)
     {
-        BitUnpacking8LongLE.unpack(src, srcOff, dst, dstOff, bits);
-    }
-
-    public static void bitUnpack8LongLE(
-            IntToLongFunction src, int srcOff,
-            long[] dst, int dstOff,
-            int bits)
-    {
-        BitUnpacking8LongLE.unpack(src, srcOff, dst, dstOff, bits);
+        BitUnpacking8LongLE.unpack(bits, src, srcOff, dst, dstOff);
     }
 
     public static void bitPack8IntBE(
+            int bits,
             int[] src, int srcOff,
-            byte[] dst, int dstOff,
-            int bits)
+            byte[] dst, int dstOff)
     {
-        BitPacking8IntBE.pack(src, srcOff, dst, dstOff, bits);
+        BitPacking8IntBE.pack(bits, src, srcOff, dst, dstOff);
     }
 
     public static void bitUnpack8IntBE(
+            int bits,
             byte[] src, int srcOff,
-            int[] dst, int dstOff,
-            int bits)
+            int[] dst, int dstOff)
     {
-        BitUnpacking8IntBE.unpack(src, srcOff, dst, dstOff, bits);
-    }
-
-    public static void bitUnpack8IntBE(
-            IntToLongFunction src, int srcOff,
-            int[] dst, int dstOff,
-            int bits)
-    {
-        BitUnpacking8IntBE.unpack(src, srcOff, dst, dstOff, bits);
+        BitUnpacking8IntBE.unpack(bits, src, srcOff, dst, dstOff);
     }
 
     public static void bitPack8LongBE(
+            int bits,
             long[] src, int srcOff,
-            byte[] dst, int dstOff,
-            int bits)
+            byte[] dst, int dstOff)
     {
-        BitPacking8LongBE.pack(src, srcOff, dst, dstOff, bits);
+        BitPacking8LongBE.pack(bits, src, srcOff, dst, dstOff);
     }
 
     public static void bitUnpack8LongBE(
+            int bits,
             byte[] src, int srcOff,
-            long[] dst, int dstOff,
-            int bits)
+            long[] dst, int dstOff)
     {
-        BitUnpacking8LongBE.unpack(src, srcOff, dst, dstOff, bits);
-    }
-
-    public static void bitUnpack8LongBE(
-            IntToLongFunction src, int srcOff,
-            long[] dst, int dstOff,
-            int bits)
-    {
-        BitUnpacking8LongBE.unpack(src, srcOff, dst, dstOff, bits);
+        BitUnpacking8LongBE.unpack(bits, src, srcOff, dst, dstOff);
     }
 }

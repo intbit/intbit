@@ -28,12 +28,12 @@ public class BitPackingLEFormatTest
         w.sync();
 
         byte[] packedInt = new byte[4];
-        bitPack8IntLE(int8, 0, packedInt, 0, 4);
+        bitPack8IntLE(4, int8, 0, packedInt, 0);
         assertThat(packedInt, is(expected));
 
         byte[] packedLong = new byte[4];
         long[] long8 = IntStream.of(int8).mapToLong(v -> v).toArray();
-        bitPack8LongLE(long8, 0, packedLong, 0, 4);
+        bitPack8LongLE(4, long8, 0, packedLong, 0);
         assertThat(packedLong, is(expected));
     }
 }

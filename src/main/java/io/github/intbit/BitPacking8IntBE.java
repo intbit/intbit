@@ -5,7 +5,7 @@ final class BitPacking8IntBE
     private BitPacking8IntBE()
     { }
 
-    public static void pack(int[] src, int srcOff, byte[] dst, int dstOff, int bits)
+    public static void pack(int bits, int[] src, int srcOff, byte[] dst, int dstOff)
     {
         switch (bits) {
         case 0:
